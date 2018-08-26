@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Enemy1.gd" type="Script" id=1]
+[ext_resource path="res://images/spritesheet_38.png" type="Texture" id=2]
+[ext_resource path="res://images/spritesheet_41.png" type="Texture" id=3]
+[ext_resource path="res://images/spritesheet_31.png" type="Texture" id=4]
+[ext_resource path="res://images/boom.png" type="Texture" id=5]
+[ext_resource path="res://images/spritesheet_55.png" type="Texture" id=6]
+[ext_resource path="res://audio/enemy_1_boom.wav" type="AudioStream" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "boom",
+"speed": 5.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[node name="Enemy1" type="KinematicBody2D"]
+
+z_index = 1
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "default"
+
+[node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -15.5401, -21.6044, 16.4411, -20.9605, 19.446, -15.1652, 11.0751, -9.36996, 29.3194, -9.5846, 35.5439, -3.57472, 9.35799, 24.3283, -6.52528, 24.543, -32.0673, -1.21369, -27.3452, -9.5846, -9.9595, -8.51141, -18.3304, -13.8774 )
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+
+

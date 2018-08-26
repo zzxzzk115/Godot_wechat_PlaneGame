@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wechat_gameover.wav-0ed36dde9327ab1d55664d1bc534684b.sample"
+
+[deps]
+
+source_file="res://audio/wechat_gameover.wav"
+dest_files=[ "res://.import/wechat_gameover.wav-0ed36dde9327ab1d55664d1bc534684b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

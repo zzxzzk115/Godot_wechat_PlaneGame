@@ -1,0 +1,201 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://PlayingState.gd" type="Script" id=1]
+[ext_resource path="res://images/bg.png" type="Texture" id=2]
+[ext_resource path="res://audio/wechat_plane_bgm.wav" type="AudioStream" id=3]
+[ext_resource path="res://HeroPlane.tscn" type="PackedScene" id=4]
+[ext_resource path="res://EnemyMaker.gd" type="Script" id=5]
+[ext_resource path="res://images/spritesheet_44.png" type="Texture" id=6]
+[ext_resource path="res://images/spritesheet_36.png" type="Texture" id=7]
+[ext_resource path="res://images/bomb.png" type="Texture" id=8]
+
+[node name="PlayingState" type="Node" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="bg" type="TextureRect" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 642.0
+margin_bottom = 1136.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+stretch_mode = 0
+
+[node name="bgm" type="AudioStreamPlayer2D" parent="." index="1"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="HeroPlane" parent="." index="2" instance=ExtResource( 4 )]
+
+position = Vector2( 326.307, 832.03 )
+
+[node name="EnemyMaker" type="Node" parent="." index="3"]
+
+script = ExtResource( 5 )
+
+[node name="Timer" type="Timer" parent="EnemyMaker" index="0"]
+
+process_mode = 1
+wait_time = 1.5
+one_shot = false
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="." index="4"]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="PauseButton" type="TextureButton" parent="UI" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 558.0
+margin_top = 16.0
+margin_right = 621.0
+margin_bottom = 77.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+_sections_unfolded = [ "Textures", "Visibility" ]
+
+[node name="Bomb" type="TextureButton" parent="UI" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 500.0
+margin_top = 1056.0
+margin_right = 583.0
+margin_bottom = 1126.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 8 )
+_sections_unfolded = [ "Textures" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Count" type="Label" parent="UI/Bomb" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 94.0
+margin_top = 31.0
+margin_right = 114.0
+margin_bottom = 45.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X 0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_styles" ]
+
+[node name="Score" type="Label" parent="UI" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 12.0
+margin_top = 11.0
+margin_right = 73.0
+margin_bottom = 25.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.734375, 0.688477, 0.688477, 1 )
+text = "Score : "
+align = 1
+valign = 1
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="Count" type="Label" parent="UI/Score" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 1.0
+margin_right = 104.0
+margin_bottom = 15.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.703125, 0.678406, 0.678406, 1 )
+text = "0"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants" ]
+
+[connection signal="finished" from="bgm" to="." method="_on_bgm_finished"]
+
+[connection signal="timeout" from="EnemyMaker/Timer" to="EnemyMaker" method="_on_Timer_timeout"]
+
+[connection signal="pressed" from="UI/PauseButton" to="." method="_on_PauseButton_pressed"]
+
+

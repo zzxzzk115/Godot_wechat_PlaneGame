@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/get_bomb.wav-a6ab49bf2f256983d338b06e04ce7346.sample"
+
+[deps]
+
+source_file="res://audio/get_bomb.wav"
+dest_files=[ "res://.import/get_bomb.wav-a6ab49bf2f256983d338b06e04ce7346.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

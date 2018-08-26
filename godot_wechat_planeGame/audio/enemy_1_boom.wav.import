@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/enemy_1_boom.wav-4cabd2a87514db6b8c9b7994e9ed2ba0.sample"
+
+[deps]
+
+source_file="res://audio/enemy_1_boom.wav"
+dest_files=[ "res://.import/enemy_1_boom.wav-4cabd2a87514db6b8c9b7994e9ed2ba0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

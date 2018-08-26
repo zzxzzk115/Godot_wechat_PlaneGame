@@ -1,0 +1,108 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://HeroPlane.gd" type="Script" id=1]
+[ext_resource path="res://images/spritesheet_24.png" type="Texture" id=2]
+[ext_resource path="res://images/spritesheet_45.png" type="Texture" id=3]
+[ext_resource path="res://images/spritesheet_21.png" type="Texture" id=4]
+[ext_resource path="res://images/spritesheet_26.png" type="Texture" id=5]
+[ext_resource path="res://images/spritesheet_16.png" type="Texture" id=6]
+[ext_resource path="res://images/boom.png" type="Texture" id=7]
+[ext_resource path="res://images/spritesheet_18.png" type="Texture" id=8]
+[ext_resource path="res://audio/bullet.wav" type="AudioStream" id=9]
+[ext_resource path="res://audio/wechat_gameover.wav" type="AudioStream" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "boom",
+"speed": 5.0
+} ]
+
+[node name="HeroPlane" type="KinematicBody2D" index="0"]
+
+position = Vector2( 321.407, 719.129 )
+z_index = 1
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "default"
+frame = 1
+playing = true
+
+[node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( 2.21747, -81.4025, 11.2425, -79.5975, 22.9749, -57.035, 22.9749, -31.765, 32.9025, -19.13, 39.22, -28.155, 48.245, -29.0575, 52.7574, -20.0325, 52.7574, 4.33499, 69.0025, 17.8725, 69.0025, 33.215, 59.075, 34.1175, 53.66, 43.1425, 35.61, 44.9475, 30.1949, 31.41, 18.4625, 44.9475, -14.9301, 44.9475, -21.2475, 33.215, -29.37, 36.825, -30.2726, 44.045, -45.6151, 45.85, -55.5425, 41.3375, -56.445, 35.02, -68.1776, 35.9225, -69.08, 18.775, -51.03, 3.4325, -51.9325, -21.8375, -47.42, -27.2525, -36.59, -27.2525, -32.98, -20.935, -32.98, -13.715, -19.4425, -31.765, -19.4425, -57.9375, -6.80753, -81.4025 )
+
+[node name="MouseJudger" type="TextureButton" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -61.0
+margin_top = -57.0
+margin_right = 60.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="Bullet" type="Node2D" parent="." index="3"]
+
+[node name="BulletPosition" type="Position2D" parent="Bullet" index="0"]
+
+position = Vector2( 1.05743, -95.938 )
+scale = Vector2( 1.17615, 1.32316 )
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Bullet" index="1"]
+
+stream = ExtResource( 9 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="." index="4"]
+
+stream = ExtResource( 10 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+
+[connection signal="button_down" from="MouseJudger" to="." method="_on_TextureButton_button_down"]
+
+[connection signal="button_up" from="MouseJudger" to="." method="_on_TextureButton_button_up"]
+
+

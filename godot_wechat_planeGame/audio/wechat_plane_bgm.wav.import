@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wechat_plane_bgm.wav-ad9e6a34100066efcfffaa66a9c8d37e.sample"
+
+[deps]
+
+source_file="res://audio/wechat_plane_bgm.wav"
+dest_files=[ "res://.import/wechat_plane_bgm.wav-ad9e6a34100066efcfffaa66a9c8d37e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
