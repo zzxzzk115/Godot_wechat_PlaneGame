@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://DoubleShoot.gd" type="Script" id=1]
+[ext_resource path="res://images/spritesheet_30.png" type="Texture" id=2]
+[ext_resource path="res://audio/get_double.wav" type="AudioStream" id=3]
+
+[node name="DoubleShoot" type="KinematicBody2D"]
+
+z_index = 5
+input_pickable = false
+collision_layer = 64
+collision_mask = 64
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Z Index" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( 0.148422, -58.8376, 29.3389, -52.2034, 43.2707, -26.9934, 8.10947, 19.446, 28.6755, 14.8021, 35.9731, 21.4363, 31.3292, 31.3876, 38.6268, 38.6852, 29.3389, 48.6366, 10.0997, 57.9244, -9.80289, 61.2415, -19.0908, 57.261, -26.3884, 31.3876, -17.1005, 25.4168, -9.13947, 20.7729, -8.47604, 14.8021, -39.6568, -17.7055, -35.6763, -39.5984, -15.7737, -55.5205 )
+
+[node name="Get" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="finished" from="Get" to="." method="_on_Get_finished"]
+
+

@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Enemy3.gd" type="Script" id=1]
+[ext_resource path="res://images/spritesheet_06.png" type="Texture" id=2]
+[ext_resource path="res://images/spritesheet_09.png" type="Texture" id=3]
+[ext_resource path="res://images/spritesheet_08.png" type="Texture" id=4]
+[ext_resource path="res://images/spritesheet_07.png" type="Texture" id=5]
+[ext_resource path="res://images/spritesheet_02.png" type="Texture" id=6]
+[ext_resource path="res://images/spritesheet_10.png" type="Texture" id=7]
+[ext_resource path="res://images/spritesheet_11.png" type="Texture" id=8]
+[ext_resource path="res://images/spritesheet_12.png" type="Texture" id=9]
+[ext_resource path="res://audio/enemy2_boom.wav" type="AudioStream" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "boom",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "hit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "shoot",
+"speed": 2.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[node name="Enemy3" type="KinematicBody2D"]
+
+z_index = 1
+input_pickable = false
+collision_layer = 4
+collision_mask = 4
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Visibility", "Z Index" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "shoot"
+frame = 1
+playing = true
+
+[node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( 0.575684, -80.8263, 15.2368, -80.0117, 20.1239, -67.7942, 50.2606, -76.7537, 68.1798, -98.7454, 70.6233, -168.793, 90.986, -167.979, 93.4295, -158.204, 95.0585, -12.4077, 78.7684, -12.4077, 86.9135, 6.32599, 87.7279, 55.1964, 114.607, 82.8896, 112.163, 102.438, 52.7041, 161.897, -46.6657, 166.784, -82.504, 128.502, -112.641, 104.067, -114.27, 83.7041, -84.9475, 51.9384, -84.9475, 0.62442, -76.8025, -12.4077, -93.9071, -14.0367, -95.5361, -167.979, -70.2864, -167.979, -67.0284, -97.1164, -49.9237, -80.0117, -23.8595, -71.0522, -13.2709, -80.8263 )
+
+[node name="EBullet" type="Node2D" parent="." index="2"]
+
+_sections_unfolded = [ "Visibility" ]
+
+[node name="EBulletPosition" type="Position2D" parent="EBullet" index="0"]
+
+position = Vector2( -0.814514, 180.006 )
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = ExtResource( 10 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+
+[connection signal="finished" from="Boom" to="." method="_on_Boom_finished"]
+
+

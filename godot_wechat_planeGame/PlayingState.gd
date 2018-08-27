@@ -1,6 +1,7 @@
 extends Node
 
 var score
+var bomb_count
 
 func _ready():
 	score = 0
@@ -14,5 +15,22 @@ func _on_bgm_finished():
 
 
 func _on_PauseButton_pressed():
-	get_tree().change_scene("res://MainScene.tscn")
+	get_node("UI/Resume").disabled = false
+	get_node("UI/Resume").visible = true
+	get_tree().paused = true
+	pass
+
+
+func _on_Bomb_pressed():
+	bomb_count = int($UI/Bomb/Count.text)
+	bomb_count -= 1
+	$UI/Bomb/Count.text = str(bomb_count)
+	$UI/Bomb/isBombed.text = "true"
+	pass
+
+
+func _on_Resume_pressed():
+	get_tree().paused = false
+	get_node("UI/Resume").disabled = true
+	get_node("UI/Resume").visible = false
 	pass

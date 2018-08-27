@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Bomb.gd" type="Script" id=1]
+[ext_resource path="res://images/spritesheet_49.png" type="Texture" id=2]
+[ext_resource path="res://audio/get_credit.wav" type="AudioStream" id=3]
+
+[node name="Bomb" type="KinematicBody2D"]
+
+z_index = 5
+input_pickable = false
+collision_layer = 64
+collision_mask = 64
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Z Index" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -0.218445, -66.2237, 16.9465, -61.3823, 32.3509, -47.2983, 39.3929, -28.813, 32.3509, -21.3309, 5.94333, 36.3257, 27.5095, 47.3288, 29.7101, 57.0116, 22.228, 73.2963, 8.14395, 75.0568, -21.3445, 60.0925, -25.3056, 53.0505, -32.7878, 55.6912, -37.6292, 54.3708, -38.5094, 31.0442, -33.668, 32.8047, -29.2668, 24.8824, -22.2247, 24.8824, -17.3834, 30.1639, -9.02097, 32.3645, -35.4285, -22.2111, -39.8298, -24.8519, -39.8298, -46.4181, -25.3056, -58.7416, -10.7815, -64.4632 )
+
+[node name="Get" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="finished" from="Get" to="." method="_on_Get_finished"]
+
+

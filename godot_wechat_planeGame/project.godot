@@ -26,6 +26,16 @@ window/stretch/mode="2d"
 
 Height=false
 
+[layer_names]
+
+2d_physics/layer_1="enemy1"
+2d_physics/layer_2="enemy2"
+2d_physics/layer_3="enemy3"
+2d_physics/layer_4="player"
+2d_physics/layer_5="bullet"
+2d_physics/layer_6="ebullet"
+2d_physics/layer_7="credit"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

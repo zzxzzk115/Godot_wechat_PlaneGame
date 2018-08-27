@@ -1,6 +1,11 @@
 extends Node
 
 
-func _on_StartGame_pressed():
+func _on_Start_pressed():
 	get_tree().change_scene("res://PlayingState.tscn")
-	pass # replace with function body
+	pass
+
+
+func _on_Exit_pressed():
+	get_tree().quit()
+	pass

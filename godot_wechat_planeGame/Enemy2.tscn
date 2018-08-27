@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Enemy2.gd" type="Script" id=1]
+[ext_resource path="res://images/spritesheet_53.png" type="Texture" id=2]
+[ext_resource path="res://images/spritesheet_40.png" type="Texture" id=3]
+[ext_resource path="res://images/spritesheet_27.png" type="Texture" id=4]
+[ext_resource path="res://images/spritesheet_34.png" type="Texture" id=5]
+[ext_resource path="res://images/boom.png" type="Texture" id=6]
+[ext_resource path="res://images/spritesheet_22.png" type="Texture" id=7]
+[ext_resource path="res://audio/enemy3_boom.wav" type="AudioStream" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "boom",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "hit",
+"speed": 5.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[node name="Enemy2" type="KinematicBody2D"]
+
+z_index = 2
+input_pickable = false
+collision_layer = 2
+collision_mask = 2
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Material", "Visibility", "Z Index" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "boom"
+
+[node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -0.00788879, -59.4798, 6.15388, -58.1594, 6.15388, -54.6384, 9.67491, -50.2371, 17.1571, -48.9167, 17.1571, -39.2339, 9.23479, -36.5932, 9.23479, -29.5511, 17.5972, -28.2308, 19.3577, -25.1499, 23.3188, -25.1499, 24.6392, -15.0269, 33.0016, -22.5091, 47.0857, -19.8683, 47.0857, 23.7042, 36.0825, 25.4647, 33.0016, 20.6233, 30.801, 27.6654, 21.1182, 33.8271, 11.4354, 60.6749, -7.93018, 60.2348, -20.6939, 36.4679, -29.9365, 21.0635, -33.4575, 26.7851, -47.1015, 25.0246, -46.6613, -23.3894, -32.1372, -22.5091, -25.5352, -14.5868, -25.5352, -27.3505, -20.6939, -26.9104, -18.9333, -30.4314, -10.1308, -28.2308, -9.25055, -37.9135, -16.2926, -38.7938, -16.7327, -48.4766, -10.1308, -49.797, -7.93018, -54.1982, -6.16966, -58.1594 )
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 8 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+
+[connection signal="finished" from="Boom" to="." method="_on_Boom_finished"]
+
+

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://EBullet.gd" type="Script" id=1]
+[ext_resource path="res://images/spritesheet_03_05.png" type="Texture" id=2]
+
+[node name="EBullet" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 32
+collision_mask = 32
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Z Index" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -0.807228, -15.6857, 3.47366, -14.4966, 6.08975, -10.6913, 7.51672, -8.7887, 7.04106, 8.57267, 3.47366, 10.9509, 3.23583, 13.0914, -1.04506, 14.5183, -4.37463, 12.1401, -4.61246, 9.99963, -7.70422, 7.62136, -8.17987, -8.07522, -4.13681, -13.3074 )
+
+

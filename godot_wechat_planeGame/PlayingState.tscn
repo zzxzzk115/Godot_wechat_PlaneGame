@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://PlayingState.gd" type="Script" id=1]
 [ext_resource path="res://images/bg.png" type="Texture" id=2]
@@ -8,8 +8,53 @@
 [ext_resource path="res://images/spritesheet_44.png" type="Texture" id=6]
 [ext_resource path="res://images/spritesheet_36.png" type="Texture" id=7]
 [ext_resource path="res://images/bomb.png" type="Texture" id=8]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://audio/use_bomb.wav" type="AudioStream" id=10]
+[ext_resource path="res://images/button_normal.png" type="Texture" id=11]
+[ext_resource path="res://images/button_pressed.png" type="Texture" id=12]
+[ext_resource path="res://CreditMaker.gd" type="Script" id=13]
 
-[node name="PlayingState" type="Node" index="0"]
+[sub_resource type="DynamicFont" id=1]
+
+size = 18
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 9 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 12
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 9 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 25
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 9 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 22
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 9 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 25
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 9 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="PlayingState" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -19,8 +64,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 642.0
-margin_bottom = 1136.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 643.0
+margin_bottom = 1137.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -57,9 +104,23 @@ wait_time = 1.5
 one_shot = false
 autostart = true
 
+[node name="Timer2" type="Timer" parent="EnemyMaker" index="1"]
+
+process_mode = 1
+wait_time = 6.0
+one_shot = false
+autostart = true
+
+[node name="Timer3" type="Timer" parent="EnemyMaker" index="2"]
+
+process_mode = 1
+wait_time = 15.0
+one_shot = false
+autostart = true
+
 [node name="UI" type="CanvasLayer" parent="." index="4"]
 
-layer = 2
+layer = 6
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
@@ -96,10 +157,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 500.0
-margin_top = 1056.0
-margin_right = 583.0
-margin_bottom = 1126.0
+margin_left = 488.0
+margin_top = 1052.0
+margin_right = 571.0
+margin_bottom = 1122.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -123,22 +184,80 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 94.0
-margin_top = 31.0
-margin_right = 114.0
-margin_bottom = 45.0
+margin_left = 111.0
+margin_top = 29.0
+margin_right = 131.0
+margin_bottom = 51.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "X 0"
+text = "0"
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_styles" ]
+_sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="Label" type="Label" parent="UI/Bomb" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 93.0
+margin_top = 32.0
+margin_right = 102.0
+margin_bottom = 48.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="isBombed" type="Label" parent="UI/Bomb" index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "false"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Visibility" ]
+
+[node name="BombBoom" type="AudioStreamPlayer2D" parent="UI/Bomb" index="3"]
+
+stream = ExtResource( 10 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 [node name="Score" type="Label" parent="UI" index="2"]
 
@@ -156,8 +275,8 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0.734375, 0.688477, 0.688477, 1 )
 text = "Score : "
 align = 1
 valign = 1
@@ -173,29 +292,170 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 64.0
-margin_top = 1.0
-margin_right = 104.0
-margin_bottom = 15.0
+margin_left = 127.0
+margin_top = 2.0
+margin_right = 143.0
+margin_bottom = 29.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0.703125, 0.678406, 0.678406, 1 )
 text = "0"
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants" ]
+_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="TopScore" type="Label" parent="UI" index="3"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 12.0
+margin_top = 11.0
+margin_right = 73.0
+margin_bottom = 25.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Score : "
+align = 1
+valign = 1
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="Count" type="Label" parent="UI/TopScore" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 127.0
+margin_top = 2.0
+margin_right = 143.0
+margin_bottom = 29.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="Resume" type="TextureButton" parent="UI" index="4"]
+
+pause_mode = 2
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 257.0
+margin_top = 518.0
+margin_right = 400.0
+margin_bottom = 588.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+expand = true
+_sections_unfolded = [ "Pause", "Textures", "Visibility" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="UI/Resume" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 14.0
+margin_top = 10.0
+margin_right = 125.0
+margin_bottom = 61.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.351563, 0.351563, 0.351563, 1 )
+text = "Resume"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="CreditMaker" type="Node" parent="." index="5"]
+
+script = ExtResource( 13 )
+
+[node name="Timer" type="Timer" parent="CreditMaker" index="0"]
+
+process_mode = 1
+wait_time = 30.0
+one_shot = false
+autostart = true
+
+[node name="Timer2" type="Timer" parent="CreditMaker" index="1"]
+
+process_mode = 1
+wait_time = 50.0
+one_shot = false
+autostart = true
 
 [connection signal="finished" from="bgm" to="." method="_on_bgm_finished"]
 
 [connection signal="timeout" from="EnemyMaker/Timer" to="EnemyMaker" method="_on_Timer_timeout"]
 
+[connection signal="timeout" from="EnemyMaker/Timer2" to="EnemyMaker" method="_on_Timer2_timeout"]
+
+[connection signal="timeout" from="EnemyMaker/Timer3" to="EnemyMaker" method="_on_Timer3_timeout"]
+
 [connection signal="pressed" from="UI/PauseButton" to="." method="_on_PauseButton_pressed"]
+
+[connection signal="pressed" from="UI/Bomb" to="." method="_on_Bomb_pressed"]
+
+[connection signal="pressed" from="UI/Resume" to="." method="_on_Resume_pressed"]
+
+[connection signal="timeout" from="CreditMaker/Timer" to="CreditMaker" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="CreditMaker/Timer2" to="CreditMaker" method="_on_Timer2_timeout"]
 
 

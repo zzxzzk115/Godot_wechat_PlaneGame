@@ -25,22 +25,21 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="HeroPlane" type="KinematicBody2D" index="0"]
+[node name="HeroPlane" type="KinematicBody2D"]
 
 position = Vector2( 321.407, 719.129 )
 z_index = 1
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 119
+collision_mask = 8
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+_sections_unfolded = [ "Collision", "Material", "Transform", "Visibility", "Z Index" ]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 1
 playing = true
 
 [node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
@@ -88,6 +87,23 @@ attenuation = 1.0
 bus = "Master"
 area_mask = 1
 
+[node name="DoubleShootLeft" type="Position2D" parent="Bullet" index="2"]
+
+position = Vector2( -40.861, -41.2957 )
+scale = Vector2( 1.30617, 1.19377 )
+
+[node name="DoubleShootRight" type="Position2D" parent="Bullet" index="3"]
+
+position = Vector2( 43.5172, -40.9789 )
+scale = Vector2( 1.17052, 1.13675 )
+
+[node name="DoubleShootLastTime" type="Timer" parent="Bullet" index="4"]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = false
+autostart = false
+
 [node name="GameOver" type="AudioStreamPlayer2D" parent="." index="4"]
 
 stream = ExtResource( 10 )
@@ -104,5 +120,7 @@ area_mask = 1
 [connection signal="button_down" from="MouseJudger" to="." method="_on_TextureButton_button_down"]
 
 [connection signal="button_up" from="MouseJudger" to="." method="_on_TextureButton_button_up"]
+
+[connection signal="timeout" from="Bullet/DoubleShootLastTime" to="." method="_on_DoubleShootLastTime_timeout"]
 
 
