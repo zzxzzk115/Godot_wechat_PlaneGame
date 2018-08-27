@@ -24,8 +24,10 @@ func _on_PauseButton_pressed():
 func _on_Bomb_pressed():
 	bomb_count = int($UI/Bomb/Count.text)
 	bomb_count -= 1
-	$UI/Bomb/Count.text = str(bomb_count)
-	$UI/Bomb/isBombed.text = "true"
+	if bomb_count >= 0:
+		$UI/Bomb/Count.text = str(bomb_count)
+		if bomb_count > 0:
+			$UI/Bomb/isBombed.text = "true"
 	pass
 
 
